@@ -33,7 +33,7 @@ export const App = () => {
         toast.error(error.message);
       })
       .finally(() => setLoading(false));
-  }, [loading, page, query]);
+  }, [page, query]);
 
   const onLoadMoreClick = () => {
     setPage(prev => prev + 1);

@@ -28,11 +28,11 @@ export const App = () => {
         .then(({ images, totalPages }) => {
           setImages(prev => [...prev, ...images]);
           setTotalPages(totalPages);
-          setLoading(false);
         })
         .catch(error => {
           toast.error(error.message);
-        });
+        })
+        .finally(() => setLoading(false));
     }
   }, [loading, page, query]);
 

@@ -17,28 +17,26 @@ export const App = () => {
       setQuery(payload);
       setPage(1);
       setTotalPages(1);
-      setLoading(true);
       setImages([]);
     } else toast.success('Already loaded. Try something different');
   };
 
   useEffect(() => {
-    if (loading) {
-      getImages(query, page)
-        .then(({ images, totalPages }) => {
-          setImages(prev => [...prev, ...images]);
-          setTotalPages(totalPages);
-        })
-        .catch(error => {
-          toast.error(error.message);
-        })
-        .finally(() => setLoading(false));
-    }
+    if (loading) return;
+    setLoading(true);
+    getImages(query, page)
+      .then(({ images, totalPages }) => {
+        setImages(prev => [...prev, ...images]);
+        setTotalPages(totalPages);
+      })
+      .catch(error => {
+        toast.error(error.message);
+      })
+      .finally(() => setLoading(false));
   }, [loading, page, query]);
 
   const onLoadMoreClick = () => {
     setPage(page + 1);
-    setLoading(true);
   };
 
   const isGallery = images.length > 0;

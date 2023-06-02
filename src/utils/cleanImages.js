@@ -1,4 +1,4 @@
-export default function cleanImages(hits){
+export function cleanImages(hits){
     const images = hits.map(
       ({
         id,

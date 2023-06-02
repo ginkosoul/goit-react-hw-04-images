@@ -1,5 +1,5 @@
 import axios from "axios";
-import cleanImages from "./cleanImages";
+import { cleanImages } from "utils";
 
 const baseURL = 'https://pixabay.com/api/';
 const params ={

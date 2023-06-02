@@ -1,4 +1,4 @@
-export default function formatNumber(number) {
+export function formatNumber(number) {
     const k = 1000
     if (number < k) return number
     if (number < 100 * k) return `${Math.floor(number / 100)/10}K+`

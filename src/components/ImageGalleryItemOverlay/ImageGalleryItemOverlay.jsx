@@ -1,5 +1,5 @@
-import formatNumber from 'helpers/formatNumber';
-import css from 'components/ImageGalleryItemOverlay/ImageGalleryItemOverlay.module.css';
+import { formatNumber } from 'utils';
+import css from './ImageGalleryItemOverlay.module.css';
 import PropTypes from 'prop-types';
 import {
   BsFillHeartFill,

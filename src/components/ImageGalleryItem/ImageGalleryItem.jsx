@@ -1,4 +1,4 @@
-import ImageOverlay from 'components/ImageGalleryItemOverlay/ImageGalleryItemOverlay';
+import { ImageOverlay } from 'components';
 import PropTypes from 'prop-types';
 
 export default function ImageGalleryItem({

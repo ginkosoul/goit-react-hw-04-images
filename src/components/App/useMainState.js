@@ -1,28 +1,3 @@
-// import { useState } from "react";
-
-// const status = Object.freeze({
-//     idle: "idle",
-//     loading: "loading",
-//     error: "error",
-//     isIdle:(v) => v === status.idle,
-//     isLoading:(v) => v === status.loading,
-//     isError:(v) => v === status.error,
-// })
-
-// const newState = status.idle;
-// console.log(status.isError(newState));
-// console.log(status.isIdle(newState));
-
-// export const useMainState = () => {
-//     const [ images, setImages ] = useState([]);
-//     const [ loading, setLoading ] = useState(false);
-//     const [ query, setQuery ] = useState('');
-//     const [ page, setPage ] = useState(1);
-//     const [ totalPages, setTotalPages ] = useState(1);
-//     const [ modalImage, setModalImage ] = useState(null);
-//     return [{images, loading, query, page, totalPages, modalImage},{images: setImages, loading: setLoading, query: setQuery, page: setPage, totalPages: setTotalPages, modalImage: setModalImage}]
-// }
-
 export const reducer = (p, action) => {
     switch (action.type) {
         case 'UPDATE':

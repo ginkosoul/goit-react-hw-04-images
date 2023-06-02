@@ -6,7 +6,7 @@ export default function Searchbar({ onSearch, disable }) {
   const iconSize = 16;
   const [search, setSearch] = useState('');
   const onInputChange = event => {
-    setSearch({ query: event.target.value });
+    setSearch(event.target.value);
   };
 
   return (

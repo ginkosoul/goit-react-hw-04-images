@@ -2,23 +2,25 @@ import PropTypes from 'prop-types';
 import { useEffect } from 'react';
 
 export default function Modal({ onModalClose, largeImageURL, tags }) {
-  const closeModalOnEsc = e => {
-    if (e.code === 'Escape') {
-      onModalClose();
-    }
-  };
-
   useEffect(() => {
+    const closeModalOnEsc = e => {
+      if (e.code === 'Escape') {
+        onModalClose(null);
+      }
+    };
     window.addEventListener('keydown', closeModalOnEsc);
     return () => {
       window.removeEventListener('keydown', closeModalOnEsc);
     };
-  });
+  }, [onModalClose]);
+
+  const onBackDropClick = e =>
+    e.target === e.currentTarget && onModalClose(null);
 
   return (
-    <div onClick={() => onModalClose(null)} className="Overlay">
+    <div onClick={onBackDropClick} className="Overlay">
       <div className="Modal">
-        <img src={largeImageURL} alt={tags} />
+        <img className="ModalImage" src={largeImageURL} alt={tags} />
       </div>
     </div>
   );

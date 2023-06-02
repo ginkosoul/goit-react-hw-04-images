@@ -1,44 +1,44 @@
 import { Toaster, toast } from 'react-hot-toast';
-import { reducer, initialArg } from './useMainState';
 
 import { getImages } from 'services';
 import { Button, ImageGallery, Loader, Searchbar, Modal } from 'components';
-import { useEffect, useReducer } from 'react';
+import { useEffect, useState } from 'react';
 
 export const App = () => {
-  const [state, dispatch] = useReducer(reducer, initialArg);
-  const { images, loading, modalImage, page, totalPages, query, error } = state;
+  const [images, setImages] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [query, setQuery] = useState('');
+  const [page, setPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(0);
+  const [modalImage, setModalImage] = useState(null);
 
   const onSearch = payload => {
-    if (payload !== query) dispatch({ type: 'SET_QUERY', payload });
-    else toast.success('Already loaded. Try something different');
+    if (payload !== query) {
+      setQuery(payload);
+      setPage(1);
+      setTotalPages(1);
+      setLoading(true);
+      setImages([]);
+    } else toast.success('Already loaded. Try something different');
   };
 
   useEffect(() => {
     if (loading) {
       getImages(query, page)
-        .then(payload => {
-          dispatch({ type: 'UPDATE', payload });
+        .then(({ images, totalPages }) => {
+          setImages(prev => [...prev, ...images]);
+          setTotalPages(totalPages);
+          setLoading(false);
         })
-        .catch(payload => {
-          dispatch({ type: 'SET_ERROR', payload });
+        .catch(error => {
+          toast.error(error.message);
         });
     }
   }, [loading, page, query]);
 
-  useEffect(() => {
-    if (error) {
-      toast.error(error.message);
-      dispatch({ type: 'SET_ERROR', payload: null });
-    }
-  }, [error]);
-
-  const setModalImage = payload => {
-    dispatch({ type: 'SET_MODAL', payload });
-  };
-
   const onLoadMoreClick = () => {
-    dispatch({ type: 'NEXT_PAGE' });
+    setPage(page + 1);
+    setLoading(true);
   };
 
   const isGallery = images.length > 0;

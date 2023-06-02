@@ -8,7 +8,7 @@ export const reducer = (p, action) => {
                 loading: false,
             }
         case 'SET_QUERY':
-                return {
+            return {
                 ...p,
                     query: action.payload,
                     page: 1,
@@ -34,12 +34,6 @@ export const reducer = (p, action) => {
               ...p,
                 modalImage: action.payload
             }
-        case 'SET_ERROR':
-            return {
-             ...p,
-                error: action.payload,
-                loading: false,
-            }
         default:
             throw Error('Unknown action: ' + action.type);
     }
@@ -55,4 +49,3 @@ export const initialArg = {
     modalImage: null,
     error: null,
 }
-

@@ -22,7 +22,7 @@ export const App = () => {
   };
 
   useEffect(() => {
-    if (loading) return;
+    if (!query) return;
     setLoading(true);
     getImages(query, page)
       .then(({ images, totalPages }) => {
@@ -36,7 +36,7 @@ export const App = () => {
   }, [loading, page, query]);
 
   const onLoadMoreClick = () => {
-    setPage(page + 1);
+    setPage(prev => prev + 1);
   };
 
   const isGallery = images.length > 0;
